@@ -112,22 +112,7 @@ const Footer = () => {
       </div>
 
       {/* Newsletter Signup */}
-      <div className='bg-black text-white py-8 px-4 sm:px-8 lg:px-16'>
-        <div className='max-w-4xl mx-auto text-center'>
-          <h3 className='text-2xl font-medium mb-4'>Stay Updated with Latest Fashion Trends</h3>
-          <p className='text-gray-300 mb-6'>Subscribe to our newsletter and get 10% off your first order</p>
-          <div className='flex flex-col sm:flex-row gap-4 max-w-md mx-auto'>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className='flex-1 px-4 py-3 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white'
-            />
-            <button className='bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors'>
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </div>
+
 
       {/* Bottom Footer */}
       <div className='bg-gray-900 text-white py-6 px-4 sm:px-8 lg:px-16'>
