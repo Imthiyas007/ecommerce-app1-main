@@ -185,9 +185,7 @@ if (isProduction) {
 const allowedOrigins = [
     'http://localhost:5173',     // Local frontend
     'http://localhost:5174',     // Local admin
-    'https://ecommerce-app1-main.vercel.app',   // Current Vercel frontend
-    'https://ecommerce-app1-three.vercel.app',  // Vercel frontend
-    'https://ecommerce-app1-ten.vercel.app',     // Vercel admin
+    'https://ecommerce-app1-main.vercel.app',     // Vercel admin
     'https://ecommerce-app-frontend-ecru.vercel.app', // Admin panel URL
     process.env.FRONTEND_URL,    // Environment variable
     process.env.ADMIN_URL,       // Admin URL if set
