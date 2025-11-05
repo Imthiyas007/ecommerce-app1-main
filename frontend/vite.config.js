@@ -25,9 +25,6 @@ export default defineConfig({
           // PDF and utility libraries
           utils: ['jspdf', '@react-pdf/renderer'],
 
-          // Payment libraries
-          payment: ['react-to-print'],
-
           // Large asset libraries (if any)
           assets: ['react-icons/fa', 'react-icons/md', 'react-icons/bs', 'react-icons/ai', 'react-icons/hi']
         },
