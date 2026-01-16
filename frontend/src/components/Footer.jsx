@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className='bg-gray-50'>
       {/* Main Footer Content */}
-      <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr_1fr] gap-14 my-10 mt-40 text-sm px-4 sm:px-8 lg:px-16'>
+      <div className='flex flex-col sm:grid grid-cols-[2fr_1fr_1fr_1fr] gap-8 sm:gap-12 lg:gap-16 my-10 mt-40 text-sm px-4 sm:px-8 lg:px-16'>
 
         {/* Company Info */}
         <div className='flex flex-col gap-6'>
@@ -111,35 +111,20 @@ const Footer = () => {
 
       </div>
 
-      {/* Newsletter Signup */}
-      <div className='bg-black text-white py-8 px-4 sm:px-8 lg:px-16'>
-        <div className='max-w-4xl mx-auto text-center'>
-          <h3 className='text-2xl font-medium mb-4'>Stay Updated with Latest Fashion Trends</h3>
-          <p className='text-gray-300 mb-6'>Subscribe to our newsletter and get 10% off your first order</p>
-          <div className='flex flex-col sm:flex-row gap-4 max-w-md mx-auto'>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className='flex-1 px-4 py-3 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white'
-            />
-            <button className='bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors'>
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Bottom Footer */}
-      <div className='bg-gray-900 text-white py-6 px-4 sm:px-8 lg:px-16'>
-        <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
-          <p className='text-sm text-gray-400'>
-            © {new Date().getFullYear()} Shop from Home. All Rights Reserved.
-          </p>
-          <div className='flex gap-6 text-sm'>
-            <a href="/sitemap" className='text-gray-400 hover:text-white transition-colors'>Sitemap</a>
-            <a href="/accessibility" className='text-gray-400 hover:text-white transition-colors'>Accessibility</a>
-            <span className='text-gray-600'>|</span>
-            <span className='text-gray-400'>Made with ❤️ for Fashion Lovers</span>
+      <div className='bg-gray-900 text-white py-8 px-4 sm:px-8 lg:px-16'>
+        <div className='max-w-7xl mx-auto'>
+          <div className='flex flex-col md:flex-row justify-between items-center gap-6'>
+            <p className='text-sm text-gray-400 text-center md:text-left'>
+              © {new Date().getFullYear()} Shop from Home. All Rights Reserved.
+            </p>
+            <div className='flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-6 text-sm'>
+              <a href="/sitemap" className='text-gray-400 hover:text-white transition-colors'>Sitemap</a>
+              <span className='text-gray-600 hidden md:block'>|</span>
+              <a href="/accessibility" className='text-gray-400 hover:text-white transition-colors'>Accessibility</a>
+              <span className='text-gray-600 hidden md:block'>|</span>
+              <span className='text-gray-400 text-center md:text-right'>Made with ❤️ for Fashion Lovers</span>
+            </div>
           </div>
         </div>
       </div>
