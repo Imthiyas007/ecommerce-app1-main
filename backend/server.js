@@ -38,6 +38,9 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 const port = process.env.PORT || 4000
 
+// Trust proxy for accurate IP detection (required for Vercel deployment)
+app.set('trust proxy', 1)
+
 // Connect to database and cloudinary with error handling
 try {
     await connectDB()

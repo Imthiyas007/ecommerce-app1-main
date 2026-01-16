@@ -14,6 +14,10 @@ const connectDB = async () => {
         console.log("⚠️ Database disconnected");
     })
 
+    // Set global mongoose timeouts to prevent hanging operations
+    mongoose.set('bufferCommands', false);
+    mongoose.set('bufferMaxEntries', 0);
+
     // Set connection options for better reliability
     const options = {
         serverSelectionTimeoutMS: 30000, // Keep trying to send operations for 30 seconds
@@ -21,12 +25,12 @@ const connectDB = async () => {
         bufferCommands: false, // Disable mongoose buffering
         bufferMaxEntries: 0, // Disable mongoose buffering
         maxPoolSize: 10, // Maintain up to 10 socket connections
-        serverSelectionTimeoutMS: 30000, // Keep trying to send operations for 30 seconds
-        socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
         family: 4, // Use IPv4, skip trying IPv6
         maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity
         retryWrites: true,
-        retryReads: true
+        retryReads: true,
+        // Add timeouts for individual operations
+        maxTimeMS: 25000, // Max time for operations in milliseconds
     };
 
     try {

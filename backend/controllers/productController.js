@@ -62,26 +62,49 @@ const listProducts = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
 
-        const options = {
-            page,
-            limit,
-            sort: { date: -1 }
-        };
+        // Use manual pagination to avoid countDocuments timeout issues
+        const skip = (page - 1) * limit;
 
-        // Add timeout to database query to prevent hanging
-        const result = await Promise.race([
-            productModel.paginate({}, options),
+        // Fetch products with timeout
+        const productsQuery = productModel.find({})
+            .sort({ date: -1 })
+            .skip(skip)
+            .limit(limit)
+            .maxTimeMS(25000); // 25 second timeout
+
+        const products = await Promise.race([
+            productsQuery.exec(),
             new Promise((_, reject) =>
                 setTimeout(() => reject(new Error('Database query timeout')), 25000)
             )
         ]);
 
+        // Try to get total count, but don't fail if it times out
+        let totalProducts = 0;
+        let totalPages = 1;
+
+        try {
+            const countQuery = productModel.countDocuments({}).maxTimeMS(10000); // 10 second timeout for count
+            totalProducts = await Promise.race([
+                countQuery.exec(),
+                new Promise((resolve) => setTimeout(() => resolve(0), 10000)) // Return 0 if timeout
+            ]);
+
+            totalPages = Math.ceil(totalProducts / limit);
+        } catch (countError) {
+            console.warn('Count query timed out, returning estimated pagination');
+            // If count fails, assume there are more products and set conservative pagination
+            totalProducts = (page * limit) + 1; // Assume there's at least one more page
+            totalPages = page + 1;
+        }
+
         res.json({
             success: true,
-            products: result.docs,
-            totalPages: result.totalPages,
-            currentPage: result.page,
-            totalProducts: result.totalDocs
+            products,
+            totalPages,
+            currentPage: page,
+            totalProducts,
+            note: totalProducts === 0 ? 'Pagination may be inaccurate due to database timeout' : undefined
         })
 
     } catch (error) {
