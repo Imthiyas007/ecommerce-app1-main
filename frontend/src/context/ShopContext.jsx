@@ -62,9 +62,10 @@ const ShopContextProvider = (props) => {
 
         if (token) {
             try {
-
-                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
-
+                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, {
+                    headers: { token },
+                    timeout: 30000
+                })
             } catch (error) {
                 console.log(error)
                 toast.error(error.message)
@@ -116,9 +117,10 @@ const ShopContextProvider = (props) => {
 
         if (token) {
             try {
-
-                await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
-
+                await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, {
+                    headers: { token },
+                    timeout: 30000
+                })
             } catch (error) {
                 console.log(error)
                 toast.error(error.message)
@@ -146,8 +148,10 @@ const ShopContextProvider = (props) => {
 
     const getProductsData = useCallback(async () => {
         try {
-
-            const response = await axios.get(backendUrl + '/api/product/list')
+            const response = await axios.get(backendUrl + '/api/product/list', {
+                timeout: 30000, // 30 second timeout
+                timeoutErrorMessage: 'Request timed out while loading products'
+            })
             if (response.data.success) {
                 setProducts(response.data.products.reverse())
             } else {
@@ -156,12 +160,17 @@ const ShopContextProvider = (props) => {
 
         } catch (error) {
             console.error('Error loading products:', error)
-            if (error.code === 'ECONNABORTED') {
-                toast.error('Request timed out while loading products. Please refresh the page.')
+            if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+                toast.error('Request timed out while loading products. Please try again.')
             } else if (error.response) {
-                toast.error(error.response.data?.message || 'Server error while loading products')
+                // Server responded with error status
+                if (error.response.status >= 500) {
+                    toast.error('Server is temporarily unavailable. Please try again later.')
+                } else {
+                    toast.error(error.response.data?.message || 'Server error while loading products')
+                }
             } else if (error.request) {
-                toast.error('Network error. Please check your connection.')
+                toast.error('Network error. Please check your connection and try again.')
             } else {
                 toast.error('An unexpected error occurred while loading products')
             }
@@ -170,8 +179,10 @@ const ShopContextProvider = (props) => {
 
     const getUserCart = useCallback(async (token) => {
         try {
-
-            const response = await axios.post(backendUrl + '/api/cart/get',{},{headers:{token}})
+            const response = await axios.post(backendUrl + '/api/cart/get', {}, {
+                headers: { token },
+                timeout: 30000
+            })
             if (response.data.success) {
                 setCartItems(response.data.cartData)
             }
@@ -190,7 +201,10 @@ const ShopContextProvider = (props) => {
             }
 
             if (token) {
-                await axios.post(backendUrl + '/api/wishlist/add', { itemId }, { headers: { token } })
+                await axios.post(backendUrl + '/api/wishlist/add', { itemId }, {
+                    headers: { token },
+                    timeout: 30000
+                })
             }
         } catch (error) {
             console.log(error)
@@ -206,7 +220,10 @@ const ShopContextProvider = (props) => {
             setWishlistItems(prev => prev.filter(item => item._id !== itemId));
 
             if (token) {
-                await axios.post(backendUrl + '/api/wishlist/remove', { itemId }, { headers: { token } })
+                await axios.post(backendUrl + '/api/wishlist/remove', { itemId }, {
+                    headers: { token },
+                    timeout: 30000
+                })
             }
         } catch (error) {
             console.log(error)
@@ -221,7 +238,10 @@ const ShopContextProvider = (props) => {
 
     const getUserWishlist = useCallback(async (token) => {
         try {
-            const response = await axios.post(backendUrl + '/api/wishlist/get', {}, { headers: { token } })
+            const response = await axios.post(backendUrl + '/api/wishlist/get', {}, {
+                headers: { token },
+                timeout: 30000
+            })
             if (response.data.success) {
                 setWishlistItems(response.data.wishlistData)
             }

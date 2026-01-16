@@ -68,7 +68,14 @@ const listProducts = async (req, res) => {
             sort: { date: -1 }
         };
 
-        const result = await productModel.paginate({}, options);
+        // Add timeout to database query to prevent hanging
+        const result = await Promise.race([
+            productModel.paginate({}, options),
+            new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('Database query timeout')), 25000)
+            )
+        ]);
+
         res.json({
             success: true,
             products: result.docs,
@@ -78,7 +85,17 @@ const listProducts = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
+        console.error('Product list error:', error)
+
+        // Check if it's a database connection issue
+        if (error.message.includes('timeout') || error.message.includes('connection') || error.name === 'MongoNetworkError') {
+            return res.status(503).json({
+                success: false,
+                message: 'Database temporarily unavailable. Please try again in a few moments.',
+                retryAfter: 30
+            })
+        }
+
         res.json({ success: false, message: error.message })
     }
 }
