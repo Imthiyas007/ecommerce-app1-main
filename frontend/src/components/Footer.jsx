@@ -15,7 +15,7 @@ const Footer = () => {
         
         {/* Company Info */}
         <div className="flex flex-col gap-5">
-          <img src={assets.logo} alt="Shop from Home Logo" className="w-32" />
+          
           <p className="leading-relaxed">
             Discover premium fashion and lifestyle products at Shop from Home. We offer secure online shopping with fast delivery, easy returns, and exceptional customer service.
           </p>
