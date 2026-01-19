@@ -122,7 +122,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer */}
-      <div className="bg-black-900 text-white py-5 px-6">
+      <div className="bg-black text-white py-5 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-center md:text-left text-gray-400">
             © {currentYear} Shop from Home. All Rights Reserved.
