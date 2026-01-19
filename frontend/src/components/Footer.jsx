@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 text-sm text-gray-600">
       {/* Main Footer Content */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6 sm:px-10 lg:px-16 py-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6 py-20 items-start">
         
         {/* Company Info */}
         <div className="flex flex-col gap-6">
@@ -130,7 +130,7 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center md:justify-end gap-4 text-sm">
             <a href="/sitemap" className="text-gray-400 hover:text-white">Sitemap</a>
             <a href="/accessibility" className="text-gray-400 hover:text-white">Accessibility</a>
-            <span className="text-gray-400">Made with ❤️ for Fashion Lovers7878</span>
+            <span className="text-gray-400">Made with ❤️ for Fashion Lovers</span>
           </div>
         </div>
       </div>
