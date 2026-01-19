@@ -11,17 +11,17 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 text-sm text-gray-600">
       {/* Main Footer Content */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6 py-20 items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6 py-16 items-start">
         
         {/* Company Info */}
-        <div className="flex flex-col gap-6">
-          <img src={assets.logo} alt="Shop from Home Logo" className="w-32 mb-4" />
+        <div className="flex flex-col gap-5">
+          <img src={assets.logo} alt="Shop from Home Logo" className="w-32" />
           <p className="leading-relaxed">
             Discover premium fashion and lifestyle products at Shop from Home. We offer secure online shopping with fast delivery, easy returns, and exceptional customer service.
           </p>
 
           {/* Trust Badges */}
-          <div className="flex flex-wrap gap-4 mt-4">
+          <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2 text-green-600">
               <FaShieldAlt className="text-lg" aria-hidden="true" />
               <span className="font-medium">Secure Payment</span>
@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media */}
-          <div className="flex gap-3 mt-6">
+          <div className="flex gap-3 mt-4">
             <a href="https://facebook.com/shopfromhome" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
               className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition">
               <FaFacebookF />
@@ -106,7 +106,7 @@ const Footer = () => {
           </ul>
 
           {/* Payment Methods */}
-          <div className="mt-6">
+          <div className="mt-5">
             <p className="font-medium mb-2 text-gray-800">We Accept</p>
             <div className="flex items-center gap-2">
               <FaCreditCard className="text-gray-400" />
@@ -122,7 +122,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer */}
-      <div className="bg-gray-900 text-white py-6 px-6">
+      <div className="bg-gray-900 text-white py-5 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-center md:text-left text-gray-400">
             © {currentYear} Shop from Home. All Rights Reserved.
