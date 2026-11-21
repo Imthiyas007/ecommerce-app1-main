@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Collection from './pages/Collection'
 import About from './pages/About'
@@ -24,6 +24,9 @@ import Blocked from './pages/Blocked';
 
 
 const App = () => {
+  const { pathname } = useLocation()
+  const showFooter = ['/', '/about', '/contact'].includes(pathname)
+
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <ToastContainer />
@@ -48,7 +51,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<FAQ />} />
       </Routes>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   )
 }
